@@ -1,5 +1,5 @@
 /* Class: CISC 3130
- * Section: TY2
+ * Section: TY9
  * EmplId:
  * Name: Jonathan Scarpelli
  */
@@ -13,8 +13,8 @@ class TopStreamingArtists {
 
 /* A node represents an artist */
   class Node {
-    public String data;
-    public Node next;
+    private String data;
+    private Node next;
     public Node(String artist) {
       data = artist;
       next = null;
@@ -43,14 +43,14 @@ class TopStreamingArtists {
 
     /* Creates a new artist */
     Node newNode(String data) {
-      Node x = new Node(data);
-      return x;
+      Node s = new Node(data);
+      return s;
     }
 
     /* Prints the linked list */
     void printList() {
       Node temp = head;
-      File csvOutputFile = new File("../data/test2.csv");
+      File csvOutputFile = new File("../data/Artists in Alphabetical Order.csv");
       StringBuilder sb = new StringBuilder();
       sb.append("Artist");
       sb.append('\n');
@@ -88,7 +88,7 @@ class Hash {
     sb.append("Count");
     sb.append('\n');
 
-    TopStreamingArtists list2 = new TopStreamingArtists();
+    TopStreamingArtists topStreamingArtists = new TopStreamingArtists();
     /* Displays the occurrence of elements in the array list */
     for (Map.Entry<String, Integer> val : map.entrySet()) {
       artistList.add(val.getKey());
@@ -98,7 +98,7 @@ class Hash {
       sb.append('\n');
     }
 
-    File csvOutputFile = new File("../data/test.csv");
+    File csvOutputFile = new File("../data/Artist Frequency.csv");
     try (PrintWriter  writer= new PrintWriter(csvOutputFile)) {
       writer.write(sb.toString());
     } catch (FileNotFoundException error) {
@@ -107,10 +107,10 @@ class Hash {
 
     /* Inserts into linked list then prints the results */
     for (String s : artistList) {
-      list2.sortedInsert(list2.newNode(s));
+      topStreamingArtists.sortedInsert(topStreamingArtists.newNode(s));
     }
     System.out.println("List of Artists in Alphabetical Order");
-    list2.printList();
+    topStreamingArtists.printList();
   }
 }
 /* Test class */
