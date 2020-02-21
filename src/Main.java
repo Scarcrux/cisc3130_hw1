@@ -72,15 +72,40 @@ class TopStreamingArtists {
 
 /* The List TopStreamingArtists is composed of a series of artist names */
 class Hash {
-  public void countFrequencies(List<String> list) {
-    /* Hash map to store the frequency of element */
-    Map<String, Integer> map = new HashMap<String, Integer>();
+  Map<String, Integer> map = new HashMap<String, Integer>();
 
+  // Sort hash map by values
+  public void sortByValue() {
+      // Create as list from elements of HashMap
+      List<Map.Entry<String, Integer> > list =
+        new LinkedList<Map.Entry<String, Integer> >(map.entrySet());
+
+      // Sorts the list
+      Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+        public int compare(Map.Entry<String, Integer> o1,
+                           Map.Entry<String, Integer> o2) {
+          return (o2.getValue()).compareTo(o1.getValue());
+        }
+      });
+
+      // Reverts data back to hash map
+      HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
+      for (Map.Entry<String, Integer> element : list) {
+        temp.put(element.getKey(), element.getValue());
+      }
+      map = temp;
+  }
+
+  /* Hash map to store the frequency of element */
+  public void countFrequencies(List<String> list) {
     for (String i : list) {
       Integer j = map.get(i);
       map.put(i, (j == null) ? 1 : j + 1);
     }
+  }
 
+  /* Prints the hash map */
+  public void printMap() {
     List<String> artistList = new ArrayList<String>();;
     StringBuilder sb = new StringBuilder();
     sb.append("Artist");
@@ -140,6 +165,8 @@ public class Main {
 
       Hash count = new Hash();
       count.countFrequencies(values);
+      count.sortByValue();
+      count.printMap();
     } catch (FileNotFoundException error) {
       error.printStackTrace();
     } catch (IOException error) {
