@@ -72,7 +72,7 @@ class TopStreamingArtists {
 
 /* The List TopStreamingArtists is composed of a series of artist names */
 class Hash {
-  Map<String, Integer> map = new HashMap<String, Integer>();
+  Map<String, Integer> map = new LinkedHashMap<String, Integer>();
 
   // Sort hash map by values
   public void sortByValue() {
@@ -141,7 +141,7 @@ class Hash {
 /* Test class */
 public class Main {
   public static void main(String[] args) {
-    String csvFile = "../data/regional-global-daily-latest.csv";
+    String csvFile = "../data/regional-global-weekly-latest.csv";
     BufferedReader br = null;
     String line = "";
     String cvsSplitBy = ",";
@@ -157,6 +157,10 @@ public class Main {
           values.add("Dan + Shay");
         } else if (songInfo[2].replace("\"", "").trim().equals("next")) {
           values.add("Ariana Grande");
+        } else if (songInfo[2].replace("\"", "").trim().equals("Pt. II")) {
+          values.add("Alan Walker");
+        } else if (songInfo[2].replace("\"", "").trim().equals("Gunna and London On Da Track")) {
+          values.add("A Boogie Wit da Hoodie");
         } else if (songInfo[2].replace("\"", "").trim().equals("")) {
         } else if (!songInfo[2].replace("\"", "").trim().equals("Artist")) {
           values.add(songInfo[2].replace("\"", "").trim());
@@ -165,7 +169,7 @@ public class Main {
 
       Hash count = new Hash();
       count.countFrequencies(values);
-      count.sortByValue();
+      //count.sortByValue();
       count.printMap();
     } catch (FileNotFoundException error) {
       error.printStackTrace();
